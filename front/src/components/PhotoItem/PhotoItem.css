@@ -16,6 +16,7 @@
   background: transparent;
   border: 2px solid #80d0c7;
   border-radius: 10px;
+  cursor: pointer;
 }
 .card-title{
   display: block;

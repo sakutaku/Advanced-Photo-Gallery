@@ -7,9 +7,10 @@ interface Props {
   photo: Photo;
 }
 const PhotoItem: React.FC<Props> = ({photo}) => {
+
   return (
     <div className="card">
-      <div>
+      <div className="card-click">
         <img
           className="card-image"
           src={apiUrl + '/' + photo.image}
