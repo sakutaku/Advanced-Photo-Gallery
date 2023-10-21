@@ -41,14 +41,15 @@ const PhotoItem: React.FC<Props> = ({ photo, userPhotos, id }) => {
         <div className="card-title-wrap" onClick={handleOpen}>
           <span className="card-title">{photo.title}</span>
         </div>
-        {userPhotos && user?._id === id ? (
+        {userPhotos && user && user._id === id ? (
           <div className="card-author">
             <button
               onClick={() => onDelete(photo._id)}
               className="card-delete"
             ></button>
           </div>
-        ) : (
+        ) : null}
+        {userPhotos ? null : (
           <div className="card-author">
             Made by:
             <span>
