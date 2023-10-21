@@ -1,0 +1,42 @@
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
+import { selectPhotos, selectPhotosLoading } from '../../store/photosSlice';
+import { Fade } from 'react-awesome-reveal';
+import PhotoItem from '../../components/PhotoItem/PhotoItem';
+import { fetchPhotos } from '../../store/photosThunk';
+import './Photos.css';
+
+const Photos = () => {
+  const dispatch = useAppDispatch();
+  const photos = useAppSelector(selectPhotos);
+  const photosLoading = useAppSelector(selectPhotosLoading);
+
+  useEffect(() => {
+    dispatch(fetchPhotos());
+  }, [dispatch]);
+
+  if (photosLoading) {
+    return <div>...</div>;
+  }
+
+  if (photos.length === 0) {
+    return <Fade>
+      <div className="photos-page-nonavailable">No photos available.</div>
+    </Fade>;
+  }
+
+  return (
+    <>
+      <div className='container photos-page'>
+        {photos.map(photo =>
+          <Fade key={photo._id}>
+            <PhotoItem photo={photo}/>
+          </Fade>
+        )
+        }
+      </div>
+    </>
+  );
+};
+
+export default Photos;

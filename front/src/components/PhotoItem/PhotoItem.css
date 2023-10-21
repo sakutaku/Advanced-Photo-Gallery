@@ -1,0 +1,38 @@
+.card {
+  width: 250px;
+  position: relative;
+  margin-bottom: 30px;
+}
+.card-image{
+  width: 250px;
+  height: 200px;
+}
+.card-title-wrap{
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  width: 220px;
+  height: 180px;
+  background: transparent;
+  border: 2px solid #80d0c7;
+  border-radius: 10px;
+}
+.card-title{
+  display: block;
+  padding: 124px 0 0 7px;
+  color: #fff;
+  font-weight: bolder;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 20px;
+}
+.card-author{
+  color: #13547a;
+  font-size: 14px;
+  letter-spacing: 3px;
+  font-weight: lighter;
+  text-transform: uppercase;
+  padding: 5px 0;
+  text-align: center;
+  text-decoration: none;
+}

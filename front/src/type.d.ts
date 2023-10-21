@@ -45,3 +45,13 @@ export interface LoginMutation {
   username: string;
   password: string;
 }
+
+export interface Photo {
+  _id: string;
+  user: {
+    _id: string,
+    username: string
+  };
+  title: string;
+  image: string | null;
+}

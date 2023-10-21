@@ -26,7 +26,7 @@ const run = async () => {
         },
         {
             displayName: 'Jason',
-            username: 'Jason@bk.com',
+            username: 'Jas',
             avatar: 'fixtures/avatar2.jpeg',
             password: '0000',
             role: 'admin',
@@ -86,7 +86,7 @@ const run = async () => {
         {
             user: jason._id,
             title: 'Chicago',
-            image: 'fixtures/chicago.jpeg',
+            image: 'fixtures/chicago.jpg',
         },
         {
             user: jason._id,
