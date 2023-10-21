@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import BtnSpinner from '../Spinner/BtnSpinner';
-import { useAppDispatch } from '../../app/hook';
-import { selectLoginError, selectLoginLoading } from '../../store/usersSlice';
-import { fetchGoogleLogin, loginUser } from '../../store/usersThunk';
-import { LoginMutation } from '../../type';
-import { GoogleLogin } from '@react-oauth/google';
-
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import BtnSpinner from "../Spinner/BtnSpinner";
+import { useAppDispatch } from "../../app/hook";
+import { selectLoginError, selectLoginLoading } from "../../store/usersSlice";
+import { fetchGoogleLogin, loginUser } from "../../store/usersThunk";
+import { LoginMutation } from "../../type";
+import { GoogleLogin } from "@react-oauth/google";
 
 const LoginForm = () => {
   const loginLoading = useSelector(selectLoginLoading);
   const [state, setState] = useState<LoginMutation>({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
   const dispatch = useAppDispatch();
   const error = useSelector(selectLoginError);
   const navigate = useNavigate();
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
 
-    setState(prevState => {
-      return {...prevState, [name]: value};
+    setState((prevState) => {
+      return { ...prevState, [name]: value };
     });
   };
 
@@ -31,13 +30,13 @@ const LoginForm = () => {
     event.preventDefault();
     try {
       await dispatch(loginUser(state)).unwrap();
-      navigate('/');
+      navigate("/");
     } catch (e) {
-      alert('Something is wrong!');
+      alert("Something is wrong!");
     } finally {
       setState(() => ({
-        username: '',
-        password: ''
+        username: "",
+        password: "",
       }));
     }
   };
@@ -45,9 +44,9 @@ const LoginForm = () => {
   const googleLoginHandler = async (credential: string) => {
     try {
       await dispatch(fetchGoogleLogin(credential)).unwrap();
-      navigate('/');
+      navigate("/");
     } catch (e) {
-      alert('Something is wrong!');
+      alert("Something is wrong!");
     }
   };
 
@@ -62,19 +61,19 @@ const LoginForm = () => {
             }
           }}
           onError={() => {
-            console.log('Login Failed');
+            console.log("Login Failed");
           }}
         />
       </div>
       <div>
         <div className="input-wrap">
-          <label htmlFor="username" className="form-label">Your name:</label>
-          {
-            error ?   <span className="error">{error.error}</span> : null
-          }
+          <label htmlFor="username" className="form-label">
+            Your name:
+          </label>
+          {error ? <span className="error">{error.error}</span> : null}
           <input
             type="text"
-            className={error ? 'form-control-error' : 'form-control'}
+            className={error ? "form-control-error" : "form-control"}
             name="username"
             id="username"
             value={state.username}
@@ -82,13 +81,13 @@ const LoginForm = () => {
           />
         </div>
         <div className="input-wrap">
-          <label htmlFor="password" className="form-label">Password:</label>
-          {
-            error ?   <span className="error">{error.error}</span> : null
-          }
+          <label htmlFor="password" className="form-label">
+            Password:
+          </label>
+          {error ? <span className="error">{error.error}</span> : null}
           <input
             type="password"
-            className={error ? 'form-control-error' : 'form-control'}
+            className={error ? "form-control-error" : "form-control"}
             name="password"
             id="password"
             value={state.password}
@@ -96,12 +95,8 @@ const LoginForm = () => {
           />
         </div>
         <div className=" btn-wrap">
-          <button
-            type="submit"
-            className="form-btn"
-            disabled={loginLoading}
-          >
-            {loginLoading && <BtnSpinner/>}
+          <button type="submit" className="form-btn" disabled={loginLoading}>
+            {loginLoading && <BtnSpinner />}
             Log in
           </button>
         </div>

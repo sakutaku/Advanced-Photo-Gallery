@@ -14,6 +14,7 @@ export interface User {
   avatar: string;
   googleID: string;
 }
+
 export interface RegisterResponse {
   user: User;
   message: string;
@@ -36,11 +37,12 @@ export interface GlobalError {
 }
 
 export interface IRegister {
-  username: string,
-  password: string,
-  displayName: string,
-  phone: string,
+  username: string;
+  password: string;
+  displayName: string;
+  phone: string;
 }
+
 export interface LoginMutation {
   username: string;
   password: string;
@@ -49,13 +51,14 @@ export interface LoginMutation {
 export interface Photo {
   _id: string;
   user: {
-    _id: string,
-    displayName: string
+    _id: string;
+    displayName: string;
   };
   title: string;
   image: string | null;
 }
-export interface PhotoMutation{
+
+export interface PhotoMutation {
   title: string;
   image: File | null;
 }
@@ -64,7 +67,7 @@ export interface PhotoResponse {
   photoData: {
     _id: string;
     title: string;
-    image: string
+    image: string;
   };
   message: string;
 }

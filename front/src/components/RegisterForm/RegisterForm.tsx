@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { RegisterMutation } from '../../type';
-import { useAppDispatch } from '../../app/hook';
-import { useSelector } from 'react-redux';
-import { selectRegisterError } from '../../store/usersSlice';
-import { useNavigate } from 'react-router-dom';
-import { register } from '../../store/usersThunk';
-import FileInput from '../FileInput/FileInput';
+import React, { useState } from "react";
+import { RegisterMutation } from "../../type";
+import { useAppDispatch } from "../../app/hook";
+import { useSelector } from "react-redux";
+import { selectRegisterError } from "../../store/usersSlice";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../store/usersThunk";
+import FileInput from "../FileInput/FileInput";
 
 const RegisterForm = () => {
   const [state, setState] = useState<RegisterMutation>({
-    username: '',
-    password: '',
-    displayName: '',
+    username: "",
+    password: "",
+    displayName: "",
     avatar: null,
   });
   const dispatch = useAppDispatch();
@@ -37,15 +37,15 @@ const RegisterForm = () => {
     event.preventDefault();
     try {
       await dispatch(register(state)).unwrap();
-      alert('Congrats, you are registered!');
-      navigate('/');
+      alert("Congrats, you are registered!");
+      navigate("/");
     } catch (e) {
-      alert('Something is wrong!');
+      alert("Something is wrong!");
     } finally {
       setState(() => ({
-        username: '',
-        password: '',
-        displayName: '',
+        username: "",
+        password: "",
+        displayName: "",
         avatar: null,
       }));
     }
@@ -68,12 +68,14 @@ const RegisterForm = () => {
         <label htmlFor="username" className="form-label">
           Username
         </label>
-        {Boolean(getFieldError('username')) && (
-          <span className="error">{getFieldError('username')}</span>
+        {Boolean(getFieldError("username")) && (
+          <span className="error">{getFieldError("username")}</span>
         )}
         <input
           type="text"
-          className={getFieldError('username') ? 'form-control-error' : 'form-control'}
+          className={
+            getFieldError("username") ? "form-control-error" : "form-control"
+          }
           name="username"
           id="username"
           value={state.username}
@@ -84,12 +86,14 @@ const RegisterForm = () => {
         <label htmlFor="password" className="form-label">
           Password
         </label>
-        {Boolean(getFieldError('password')) && (
-          <span className="error">{getFieldError('password')}</span>
+        {Boolean(getFieldError("password")) && (
+          <span className="error">{getFieldError("password")}</span>
         )}
         <input
           type="text"
-          className={getFieldError('password') ? 'form-control-error' : 'form-control'}
+          className={
+            getFieldError("password") ? "form-control-error" : "form-control"
+          }
           name="password"
           id="password"
           value={state.password}
@@ -110,7 +114,11 @@ const RegisterForm = () => {
         />
       </div>
       <>
-        <FileInput onChange={filesInputChangeHandler} name="avatar" label="Image:" />
+        <FileInput
+          onChange={filesInputChangeHandler}
+          name="avatar"
+          label="Image:"
+        />
       </>
       <button type="submit" className="form-btn">
         Sign up

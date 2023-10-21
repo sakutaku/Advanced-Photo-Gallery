@@ -1,56 +1,58 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hook';
-import { logout } from '../../store/usersThunk';
-import { User } from '../../type';
-import { apiUrl } from '../../constants';
-import logo from '../../assets/images/logo.png';
-import './AppToolbar.css';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../app/hook";
+import { logout } from "../../store/usersThunk";
+import { User } from "../../type";
+import { apiUrl } from "../../constants";
+import logo from "../../assets/images/logo.png";
+import "./AppToolbar.css";
 
 interface Props {
   user: User;
 }
 
-const UserMenu: React.FC<Props> = ({user}) => {
+const UserMenu: React.FC<Props> = ({ user }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  let img = '';
+  let img = "";
   const handleLogout = () => {
-    if(window.confirm('Do you want to logout?')) {
+    if (window.confirm("Do you want to logout?")) {
       dispatch(logout());
-      navigate('/');
+      navigate("/");
     }
   };
 
   if (user?.googleID) {
     img = user.avatar;
   } else {
-    img = apiUrl + '/' + user?.avatar;
+    img = apiUrl + "/" + user?.avatar;
   }
 
   const onLogoClick = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
     <div className="header-inner container">
       <div className="header-username">
-      <h2>Hello,
+        <h2>
+          Hello,
+          <span>
+            <Link to={`/users/${user._id}`} className="user-name">
+              {user.displayName}!
+            </Link>
+          </span>
+        </h2>
         <span>
-          <Link to={`/users/${user._id}`} className="user-name">
-            {user.displayName}!
-          </Link>
+          <img src={img} alt="avatar" className="header-avatar" />
         </span>
-      </h2>
-      <span><img src={img} alt="avatar" className="header-avatar" /></span>
-    </div>
+      </div>
       <div className="logo" onClick={onLogoClick}>
-        <img src={logo} alt="logo" className="logo-img"/>
+        <img src={logo} alt="logo" className="logo-img" />
       </div>
       <div className="header-inner-right">
         <button className="header-logout" onClick={handleLogout}></button>
       </div>
-
     </div>
   );
 };

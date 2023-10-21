@@ -1,10 +1,11 @@
-.photos-user-page{
+.photos-user-page {
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.photos-user-page-title{
+
+.photos-user-page-title {
   text-align: center;
   margin-bottom: 0;
   margin-top: 10px;
@@ -13,12 +14,14 @@
   letter-spacing: 2px;
   font-weight: lighter;
 }
-.photos-user-page-wrap{
+
+.photos-user-page-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.photos-user-page-btn{
+
+.photos-user-page-btn {
   text-decoration: none;
   padding: 10px 5px;
   border: 1px solid #13547a;
@@ -27,7 +30,8 @@
   margin-top: 10px;
   border-radius: 20px;
 }
-.photos-user-page-btn:hover{
+
+.photos-user-page-btn:hover {
   border: 1px solid #13547a;
   background: transparent;
   color: #13547a;

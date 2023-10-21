@@ -1,5 +1,5 @@
-import React from 'react';
-import './BtnSpinner.css';
+import React from "react";
+import "./BtnSpinner.css";
 
 const BtnSpinner = () => {
   return (

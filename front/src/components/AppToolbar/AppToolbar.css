@@ -1,7 +1,11 @@
-.header{
+.header {
   background-color: #80d0c7;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
-.header-inner{
+
+.header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,18 +13,21 @@
   padding-bottom: 13px;
   color: #fff;
 }
-.logo{
+
+.logo {
   cursor: pointer;
 }
-.header-inner-right{
+
+.header-inner-right {
   display: flex;
   align-items: center;
 }
-.header-logout{
+
+.header-logout {
   margin-left: 30px;
   cursor: pointer;
   background-color: transparent;
-  background-image: url('../../assets/images/logout.svg');
+  background-image: url("../../assets/images/logout.svg");
   padding: 15px;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -28,46 +35,52 @@
   background-position: center;
 }
 
-.header-username{
+.header-username {
   display: flex;
   align-items: center;
   letter-spacing: 2px;
 }
-.header-username h2{
+
+.header-username h2 {
   font-weight: lighter;
   margin: 0;
   font-size: 20px;
 }
-.header-avatar{
+
+.header-avatar {
   border-radius: 50%;
   width: 35px;
   height: 35px;
   margin-left: 10px;
 }
+
 .header-register,
-.header-login{
+.header-login {
   text-decoration: none;
-  color:#ffffff;
+  color: #ffffff;
   font-size: 20px;
 }
-.header-register{
+
+.header-register {
   margin-right: 10px;
 }
+
 .header-login:hover,
-.header-register:hover{
+.header-register:hover {
   color: #13547a;
 }
 
-.logo-img{
+.logo-img {
   width: 65px;
   height: 60px;
 }
 
-.user-name{
+.user-name {
   text-decoration: none;
   color: #fff;
   margin-left: 5px;
 }
-.user-name:hover{
+
+.user-name:hover {
   color: #13547a;
 }

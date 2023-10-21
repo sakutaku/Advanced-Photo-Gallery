@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { PhotoMutation } from '../../type';
-import FileInput from '../FileInput/FileInput';
-import { useSelector } from 'react-redux';
-import { selectAddError } from '../../store/photosSlice';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../app/hook';
-import { createPhoto } from '../../store/photosThunk';
-import { selectUser } from '../../store/usersSlice';
+import React, { useState } from "react";
+import { PhotoMutation } from "../../type";
+import FileInput from "../FileInput/FileInput";
+import { useSelector } from "react-redux";
+import { selectAddError, selectCreateLoading } from "../../store/photosSlice";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { createPhoto } from "../../store/photosThunk";
+import { selectUser } from "../../store/usersSlice";
+import BtnSpinner from "../Spinner/BtnSpinner";
 
 const PhotoForm = () => {
   const [state, setState] = useState<PhotoMutation>({
-    title: '',
+    title: "",
     image: null,
   });
   const error = useSelector(selectAddError);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-
+  const loading = useAppSelector(selectCreateLoading);
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -26,7 +27,6 @@ const PhotoForm = () => {
       return { ...prevState, [name]: value };
     });
   };
-
 
   const filesInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
@@ -41,17 +41,17 @@ const PhotoForm = () => {
 
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    if(user) {
+    if (user) {
       try {
         await dispatch(createPhoto(state)).unwrap();
-        alert('Congrats, you added new photo!');
-        navigate('/');
+        alert("Congrats, you added new photo!");
+        navigate("/");
       } catch (e) {
-        alert('Something is wrong!');
+        alert("Something is wrong!");
       } finally {
         setState(() => ({
-          title: '',
-          image: null
+          title: "",
+          image: null,
         }));
       }
     }
@@ -59,26 +59,30 @@ const PhotoForm = () => {
 
   return (
     <form className="form" onSubmit={submitFormHandler}>
-      <h2 className="form-title"></h2>
+      <h2 className="form-title">Add new photo</h2>
       <div className="input-wrap">
         <label className="form-label">Title</label>
-        {
-          error ?   <span className="error">{error.error}</span> : null
-        }
+        {error ? <span className="error">{error.error}</span> : null}
         <input
-          className={error ? 'form-control-error' : 'form-control'}
+          className={error ? "form-control-error" : "form-control"}
           name="title"
           type="text"
           value={state.title}
           onChange={inputChangeHandler}
-          required
         />
       </div>
       <>
-        <FileInput onChange={filesInputChangeHandler} name="image" label="Image:" />
+        <FileInput
+          onChange={filesInputChangeHandler}
+          name="image"
+          label="Image:"
+        />
       </>
       <div className="input-wrap">
-        <button className="form-btn" type="submit">Add</button>
+        <button className="form-btn" type="submit" disabled={loading}>
+          {loading && <BtnSpinner />}
+          Add
+        </button>
       </div>
     </form>
   );

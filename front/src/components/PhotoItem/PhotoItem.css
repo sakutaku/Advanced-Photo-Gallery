@@ -3,11 +3,13 @@
   position: relative;
   margin-bottom: 30px;
 }
-.card-image{
+
+.card-image {
   width: 250px;
   height: 200px;
 }
-.card-title-wrap{
+
+.card-title-wrap {
   position: absolute;
   top: 10px;
   left: 15px;
@@ -18,7 +20,8 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.card-title{
+
+.card-title {
   display: block;
   padding: 124px 0 0 7px;
   color: #fff;
@@ -27,7 +30,8 @@
   letter-spacing: 2px;
   font-size: 20px;
 }
-.card-author{
+
+.card-author {
   color: #13547a;
   font-size: 14px;
   letter-spacing: 3px;
@@ -35,19 +39,25 @@
   text-transform: uppercase;
   padding: 5px 0;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
 }
-.card-image-big{
+
+.card-image-big {
   width: 500px;
   height: 350px;
 }
-.modal{
+
+.modal {
   border: none;
   width: 500px;
   text-align: center;
   margin: 200px auto 0;
 }
-.modal-btn{
+
+.modal-btn {
   background: #80d0c7;
   border: 1px solid #80d0c7;
   color: #fff;
@@ -55,11 +65,26 @@
   letter-spacing: 2px;
   cursor: pointer;
 }
-.card-user{
+
+.card-user {
   margin-left: 5px;
   text-decoration: none;
   color: #13547a;
 }
-.card-user:hover{
+
+.card-user:hover {
   color: #80d0c7;
+}
+
+.card-delete {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  background-image: url("../../assets/images/trash.svg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }

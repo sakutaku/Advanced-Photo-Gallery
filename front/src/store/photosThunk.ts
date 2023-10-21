@@ -1,25 +1,27 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GlobalError, Photo, PhotoMutation } from '../type';
-import axiosApi from '../axiosApi';
-import { isAxiosError } from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { GlobalError, Photo, PhotoMutation } from "../type";
+import axiosApi from "../axiosApi";
+import { isAxiosError } from "axios";
 
 export const fetchPhotos = createAsyncThunk<Photo[], void | string>(
-  'photos/fetchAll',
+  "photos/fetchAll",
   async (user) => {
     if (user) {
       const response = await axiosApi.get<Photo[]>(`/photos?user=${user}`);
       return response.data;
     }
-    const response = await axiosApi.get<Photo[]>('/photos');
+    const response = await axiosApi.get<Photo[]>("/photos");
     return response.data;
-  });
+  },
+);
 
 export const createPhoto = createAsyncThunk<
   void,
   PhotoMutation,
-  {rejectValue: GlobalError}>(
-  'photos/create',
-  async (PhotoMutation: PhotoMutation, {rejectWithValue}) => {
+  { rejectValue: GlobalError }
+>(
+  "photos/create",
+  async (PhotoMutation: PhotoMutation, { rejectWithValue }) => {
     try {
       const formData = new FormData();
       const keys = Object.keys(PhotoMutation) as (keyof PhotoMutation)[];
@@ -32,7 +34,7 @@ export const createPhoto = createAsyncThunk<
         }
       });
 
-      await axiosApi.post('/photos', formData);
+      await axiosApi.post("/photos", formData);
     } catch (e) {
       if (isAxiosError(e) && e.response && e.response.status === 400) {
         return rejectWithValue(e.response.data as GlobalError);
@@ -40,5 +42,14 @@ export const createPhoto = createAsyncThunk<
 
       throw e;
     }
+  },
+);
+
+export const deletePhoto = createAsyncThunk<Photo[], string>(
+  "photos/delete",
+  async (id) => {
+    const response = await axiosApi.delete("/photos/" + id);
+    console.log(response.data);
+    return response.data;
   },
 );
