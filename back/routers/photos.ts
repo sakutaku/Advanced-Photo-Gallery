@@ -74,3 +74,5 @@ photosRouter.delete('/:id', auth, permit('admin'), async (req, res, next) => {
         next(e);
     }
 });
+
+export default photosRouter;
