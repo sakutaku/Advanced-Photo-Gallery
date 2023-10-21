@@ -11,9 +11,10 @@ import { deletePhoto, fetchPhotos } from "../../store/photosThunk";
 interface Props {
   photo: Photo;
   userPhotos?: boolean;
+  id?: string;
 }
 
-const PhotoItem: React.FC<Props> = ({ photo, userPhotos }) => {
+const PhotoItem: React.FC<Props> = ({ photo, userPhotos, id }) => {
   const [open, setOpen] = React.useState(false);
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
@@ -40,7 +41,14 @@ const PhotoItem: React.FC<Props> = ({ photo, userPhotos }) => {
         <div className="card-title-wrap" onClick={handleOpen}>
           <span className="card-title">{photo.title}</span>
         </div>
-        {userPhotos ? null : (
+        {userPhotos && user?._id === id ? (
+          <div className="card-author">
+            <button
+              onClick={() => onDelete(photo._id)}
+              className="card-delete"
+            ></button>
+          </div>
+        ) : (
           <div className="card-author">
             Made by:
             <span>

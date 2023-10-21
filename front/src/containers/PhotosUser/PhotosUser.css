@@ -36,3 +36,12 @@
   background: transparent;
   color: #13547a;
 }
+.photos-page-nonavailable{
+  margin-top: 100px;
+}
+.photos-page-nonavailable-title{
+  margin-right: 30px;
+  color: #80d0c7;
+  text-transform: uppercase;
+  font-weight: bolder;
+}

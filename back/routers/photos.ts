@@ -63,7 +63,7 @@ photosRouter.post(
   },
 );
 
-photosRouter.delete("/:id", auth, permit("admin"), async (req, res, next) => {
+photosRouter.delete("/:id", auth, async (req, res, next) => {
   try {
     const photoId = req.params.id;
 

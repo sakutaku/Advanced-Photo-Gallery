@@ -24,14 +24,6 @@ const Photos = () => {
     );
   }
 
-  if (photos.length === 0) {
-    return (
-      <Fade>
-        <div className="photos-page-nonavailable">No photos available.</div>
-      </Fade>
-    );
-  }
-
   return (
     <div className="container">
       <div className="photos-page">

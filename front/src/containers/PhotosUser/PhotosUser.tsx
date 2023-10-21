@@ -33,10 +33,35 @@ const PhotosUser = () => {
   if (photos.length === 0) {
     return (
       <Fade>
-        <div className="photos-page-nonavailable">No photos available.</div>
+        <div className="container">
+          <div className="photos-page-nonavailable">
+            <div className="photos-page-nonavailable-title">
+              No photos available.
+            </div>
+            <div>
+              {user && user._id === id ? (
+                <Link to="/add-photo" className="photos-user-page-btn">
+                  Add new photo
+                </Link>
+              ) : null}
+            </div>
+          </div>
+        </div>
       </Fade>
     );
   }
+
+  const items1 = photos.map((photo) => (
+    <Fade key={photo._id}>
+      <PhotoItem photo={photo} userPhotos={true} id={id} />
+    </Fade>
+  ));
+
+  const items2 = photos.map((photo) => (
+    <Fade key={photo._id}>
+      <PhotoItem photo={photo} userPhotos={true} />
+    </Fade>
+  ));
 
   return (
     <div className="container">
@@ -55,11 +80,7 @@ const PhotosUser = () => {
         </h2>
       )}
       <div className="photos-user-page">
-        {photos.map((photo) => (
-          <Fade key={photo._id}>
-            <PhotoItem photo={photo} userPhotos={true} />
-          </Fade>
-        ))}
+        {user && user._id === id ? items1 : items2}
       </div>
     </div>
   );
