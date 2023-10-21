@@ -6,6 +6,11 @@ import Register from './containers/Register/Register';
 import './App.css';
 import Photos from './containers/Photos/Photos';
 import PhotosUser from './containers/PhotosUser/PhotosUser';
+import AddPhoto from './containers/AddPhoto/AddPhoto';
+import {addInterceptors} from './axiosApi';
+import { store } from './app/store';
+
+addInterceptors(store);
 
 const App = () => {
   return (
@@ -16,6 +21,7 @@ const App = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/users/:id" element={<PhotosUser/>}/>
+        <Route path="/add-photo" element={<AddPhoto/>}/>
       </Routes>
     </>
   );

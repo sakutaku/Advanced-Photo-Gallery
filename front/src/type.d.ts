@@ -55,3 +55,16 @@ export interface Photo {
   title: string;
   image: string | null;
 }
+export interface PhotoMutation{
+  title: string;
+  image: File | null;
+}
+
+export interface PhotoResponse {
+  photoData: {
+    _id: string;
+    title: string;
+    image: string
+  };
+  message: string;
+}

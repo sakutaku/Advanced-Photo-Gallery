@@ -13,7 +13,19 @@ export const register = createAsyncThunk<
   'users/register',
   async (registerMutation: RegisterMutation, {rejectWithValue}) => {
     try {
-      const response = await axiosApi.post<RegisterResponse>('/users', registerMutation);
+      const formData = new FormData();
+
+      const keys = Object.keys(registerMutation) as (keyof RegisterMutation)[];
+
+      keys.forEach((key) => {
+        const value = registerMutation[key];
+
+        if (value !== null) {
+          formData.append(key, value);
+        }
+      });
+
+      const response = await axiosApi.post<RegisterResponse>('/users', formData);
       return response.data;
     } catch (e) {
       if( isAxiosError(e) && e.response && e.response.status === 400 ) {
@@ -33,7 +45,6 @@ export const loginUser = createAsyncThunk<
   async (loginMutation, {rejectWithValue}) => {
     try {
       const response = await axiosApi.post<RegisterResponse>('/users/sessions', loginMutation);
-      console.log(response.data)
       return response.data;
     } catch (e) {
       if (isAxiosError(e) && e.response && e.response.status === 400) {

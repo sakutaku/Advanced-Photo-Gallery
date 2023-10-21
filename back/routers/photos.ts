@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import User from "../models/User";
 import Photo from "../models/Photo";
-import auth from "../middleware/auth";
+import auth, {RequestWithUser} from "../middleware/auth";
 import {imagesUpload} from "../multer";
 import permit from "../middleware/permit";
 
@@ -33,13 +33,14 @@ photosRouter.get('/', async (req, res, next) => {
 
 photosRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next) => {
     try {
+        const user = (req as RequestWithUser).user;
 
-        if (!(req.body.user && req.body.title && req.body.image)) {
+        if (!(req.body.title && req.file)) {
             return res.status(400).send('Title and image are required fields.');
         }
 
         const photoData = new Photo({
-            user: req.body.user,
+            user: user._id,
             title: req.body.title,
             image: req.file ? req.file.filename : null,
         });
@@ -47,7 +48,12 @@ photosRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next
 
         await photoData.save();
 
-        return res.status(200).send(photoData);
+        const answer = {
+            photoData,
+            message: 'You added new photo!',
+        };
+
+        return res.send(answer);
     } catch (e) {
 
         if (e instanceof mongoose.Error.ValidationError) {

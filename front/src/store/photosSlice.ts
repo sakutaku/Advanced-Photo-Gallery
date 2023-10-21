@@ -1,16 +1,20 @@
-import { Photo } from '../type';
+import { GlobalError, Photo } from '../type';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchPhotos } from './photosThunk';
+import { createPhoto, fetchPhotos } from './photosThunk';
 import { RootState } from '../app/store';
 
 interface CocktailsState {
-  photos: Photo[];
-  photosLoading: boolean;
+  photos: Photo[],
+  photosLoading: boolean,
+  addError: GlobalError | null,
+  createLoading: boolean,
 }
 
 const initialState: CocktailsState = {
   photos: [],
   photosLoading: false,
+  addError: null,
+  createLoading: false,
 };
 
 export const photosSlice = createSlice({
@@ -28,10 +32,22 @@ export const photosSlice = createSlice({
     builder.addCase(fetchPhotos.rejected, (state) => {
       state.photosLoading = false;
     });
+    builder.addCase(createPhoto.pending, (state) => {
+      state.createLoading = true;
+      state.addError = null;
+    });
+    builder.addCase(createPhoto.fulfilled, (state) => {
+      state.createLoading = false;
+    });
+    builder.addCase(createPhoto.rejected, (state, {payload: error}) => {
+      state.createLoading = false;
+      state.addError = error || null;
+    });
   },
 });
 
 export const photosReducer = photosSlice.reducer;
 export const selectPhotos = (state: RootState) => state.photos.photos;
 export const selectPhotosLoading = (state: RootState) => state.photos.photosLoading;
+export const selectAddError = (state: RootState) => state.photos.addError;
 

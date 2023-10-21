@@ -110,7 +110,7 @@ const RegisterForm = () => {
         />
       </div>
       <>
-        <FileInput onChange={filesInputChangeHandler} name="image" label="Image:" />
+        <FileInput onChange={filesInputChangeHandler} name="avatar" label="Image:" />
       </>
       <button type="submit" className="form-btn">
         Sign up
