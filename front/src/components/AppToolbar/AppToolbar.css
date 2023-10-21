@@ -1,0 +1,59 @@
+.header{
+  background-color: #80d0c7;
+}
+.header-inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+}
+.logo{
+  cursor: pointer;
+}
+.header-inner-right{
+  display: flex;
+  align-items: center;
+}
+.header-logout{
+  margin-left: 30px;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url('../../assets/images/logout.svg');
+  padding: 15px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  border: none;
+  background-position: center;
+}
+
+.header-username{
+  display: flex;
+  align-items: center;
+  letter-spacing: 2px;
+}
+.header-username h2{
+  font-weight: lighter;
+  margin: 0;
+  font-size: 20px;
+}
+.header-avatar{
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+}
+.header-register,
+.header-login{
+  text-decoration: none;
+  color:#ffffff;
+  font-size: 20px;
+}
+.header-register{
+  margin-right: 10px;
+}
+.header-login:hover,
+.header-register:hover{
+  color: #13547a;
+}
