@@ -32,14 +32,6 @@ const PhotoItem: React.FC<Props> = ({ photo, userPhotos, id }) => {
     }
   };
 
-  const items =
-    user && user.role === userRoles.admin ? (
-      <button
-        onClick={() => onDelete(photo._id)}
-        className="card-delete"
-      ></button>
-    ) : null;
-
   return (
     <>
       <div className="card">
@@ -57,9 +49,7 @@ const PhotoItem: React.FC<Props> = ({ photo, userPhotos, id }) => {
             ></button>
           </div>
         ) : null}
-        {userPhotos ? (
-          items
-        ) : (
+        {userPhotos ? null : (
           <div className="card-author">
             Made by:
             <span>
