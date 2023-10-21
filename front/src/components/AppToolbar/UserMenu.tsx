@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hook';
 import { logout } from '../../store/usersThunk';
 import { User } from '../../type';
@@ -35,7 +35,13 @@ const UserMenu: React.FC<Props> = ({user}) => {
   return (
     <div className="header-inner container">
       <div className="header-username">
-      <h2>Hello, {user.displayName}!</h2>
+      <h2>Hello,
+        <span>
+          <Link to={`/users/${user._id}`} className="user-name">
+            {user.displayName}!
+          </Link>
+        </span>
+      </h2>
       <span><img src={img} alt="avatar" className="header-avatar" /></span>
     </div>
       <div className="logo" onClick={onLogoClick}>

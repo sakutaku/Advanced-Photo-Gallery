@@ -62,3 +62,12 @@
   width: 65px;
   height: 60px;
 }
+
+.user-name{
+  text-decoration: none;
+  color: #fff;
+  margin-left: 5px;
+}
+.user-name:hover{
+  color: #13547a;
+}
