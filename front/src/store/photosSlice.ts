@@ -21,7 +21,7 @@ export const photosSlice = createSlice({
     builder.addCase(fetchPhotos.pending, (state) => {
       state.photosLoading = true;
     });
-    builder.addCase(fetchPhotos.fulfilled, (state, { payload: cocktails }) => {
+    builder.addCase(fetchPhotos.fulfilled, (state, {payload: cocktails}) => {
       state.photos = cocktails;
       state.photosLoading = false;
     });

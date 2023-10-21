@@ -50,7 +50,7 @@ export interface Photo {
   _id: string;
   user: {
     _id: string,
-    username: string
+    displayName: string
   };
   title: string;
   image: string | null;

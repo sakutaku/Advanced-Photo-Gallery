@@ -28,7 +28,8 @@ const Photos = () => {
 
   return (
     <>
-      <div className='container photos-page'>
+      <div className="container photos-page">
+
         {photos.map(photo =>
           <Fade key={photo._id}>
             <PhotoItem photo={photo}/>

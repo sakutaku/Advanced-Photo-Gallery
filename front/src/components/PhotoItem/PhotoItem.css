@@ -37,3 +37,21 @@
   text-align: center;
   text-decoration: none;
 }
+.card-image-big{
+  width: 500px;
+  height: 350px;
+}
+.modal{
+  border: none;
+  width: 500px;
+  text-align: center;
+  margin: 200px auto 0;
+}
+.modal-btn{
+  background: #80d0c7;
+  border: 1px solid #80d0c7;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
