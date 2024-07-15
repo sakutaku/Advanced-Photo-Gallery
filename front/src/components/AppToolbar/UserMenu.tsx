@@ -51,6 +51,9 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         <img src={logo} alt="logo" className="logo-img" />
       </div>
       <div className="header-inner-right">
+        <button className="header-add">
+          <Link to="/add-photo">Add new photo</Link>
+        </button>
         <button className="header-logout" onClick={handleLogout}></button>
       </div>
     </div>

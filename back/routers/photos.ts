@@ -65,12 +65,17 @@ photosRouter.post(
 
 photosRouter.delete("/:id", auth, async (req, res, next) => {
   try {
+    const user = (req as RequestWithUser).user;
     const photoId = req.params.id;
 
     const photo = await Photo.findById(photoId);
 
     if (!photo) {
       return res.status(404).json({ error: "Photo not found" });
+    }
+
+    if (user.role !== 'admin' && photo.user.toString() !== user._id.toString()) {
+      return res.status(403).json({ error: 'You are not authorized to delete this photo' });
     }
 
     await Photo.deleteOne({ _id: photo._id });

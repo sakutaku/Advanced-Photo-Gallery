@@ -24,7 +24,7 @@
 }
 
 .header-logout {
-  margin-left: 30px;
+  margin-left: 10px;
   cursor: pointer;
   background-color: transparent;
   background-image: url("../../assets/images/logout.svg");
@@ -36,6 +36,7 @@
 }
 
 .header-username {
+  width: 200px;
   display: flex;
   align-items: center;
   letter-spacing: 2px;
@@ -67,7 +68,7 @@
 
 .header-login:hover,
 .header-register:hover {
-  color: #13547a;
+  text-decoration: underline;
 }
 
 .logo-img {
@@ -82,5 +83,18 @@
 }
 
 .user-name:hover {
-  color: #13547a;
+  text-decoration: underline;
+}
+
+.header-add {
+  cursor: pointer;
+  color: #fff;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.header-add a {
+  text-decoration: none;
+  color: #fff;
 }

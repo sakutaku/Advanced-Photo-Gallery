@@ -61,6 +61,10 @@ const RegisterForm = () => {
       }));
     }
   };
+
+  const isFormValid =
+    state.username !== "" && state.password !== "" && state.displayName !== "";
+
   return (
     <form className="form" onSubmit={submitFormHandler}>
       <h2 className="form-title">Registration</h2>
@@ -120,7 +124,11 @@ const RegisterForm = () => {
           label="Image:"
         />
       </>
-      <button type="submit" className="form-btn">
+      <button
+        disabled={!isFormValid}
+        type="submit"
+        className={isFormValid ? "form-btn" : "form-btn-dis"}
+      >
         Sign up
       </button>
     </form>

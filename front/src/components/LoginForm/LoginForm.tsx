@@ -50,6 +50,8 @@ const LoginForm = () => {
     }
   };
 
+  const isFormValid = state.username !== "" && state.password !== "";
+
   return (
     <form className="form" onSubmit={submitFormHandler}>
       <h2 className="form-title">Login</h2>
@@ -95,7 +97,11 @@ const LoginForm = () => {
           />
         </div>
         <div className=" btn-wrap">
-          <button type="submit" className="form-btn" disabled={loginLoading}>
+          <button
+            type="submit"
+            className={isFormValid ? "form-btn" : "form-btn-dis"}
+            disabled={loginLoading || !isFormValid}
+          >
             {loginLoading && <BtnSpinner />}
             Log in
           </button>

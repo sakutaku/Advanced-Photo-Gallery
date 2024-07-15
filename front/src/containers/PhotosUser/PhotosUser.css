@@ -24,17 +24,17 @@
 .photos-user-page-btn {
   text-decoration: none;
   padding: 10px 5px;
-  border: 1px solid #13547a;
-  background: #13547a;
+  border: 1px solid #80d0c7;
+  background: #80d0c7;
   color: #ffff;
   margin-top: 10px;
   border-radius: 20px;
 }
 
 .photos-user-page-btn:hover {
-  border: 1px solid #13547a;
+  border: 1px solid #80d0c7;
   background: transparent;
-  color: #13547a;
+  color: #80d0c7;
 }
 .photos-page-nonavailable{
   margin-top: 100px;
