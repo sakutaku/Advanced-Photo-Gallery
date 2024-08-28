@@ -37,10 +37,9 @@ const RegisterForm = () => {
     event.preventDefault();
     try {
       await dispatch(register(state)).unwrap();
-      alert("Congrats, you are registered!");
       navigate("/");
     } catch (e) {
-      alert("Something is wrong!");
+      console.log(e);
     } finally {
       setState(() => ({
         username: "",

@@ -54,6 +54,7 @@ export interface Photo {
     _id: string;
     displayName: string;
   };
+  category: string;
   title: string;
   image: string | null;
 }
@@ -61,6 +62,7 @@ export interface Photo {
 export interface PhotoMutation {
   title: string;
   image: File | null;
+  category: string;
 }
 
 export interface PhotoResponse {
@@ -70,4 +72,9 @@ export interface PhotoResponse {
     image: string;
   };
   message: string;
+}
+
+export interface ICategory{
+  _id: string,
+  title: string
 }

@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import { usersReducer } from "../store/usersSlice";
 import { photosReducer } from "../store/photosSlice";
+import { categoriesReducer } from "../store/categoriesSlice";
 
 const usersPersistConfig = {
   key: "store:users",
@@ -20,8 +21,10 @@ const usersPersistConfig = {
 
 const rootReducer = combineReducers({
   users: persistReducer(usersPersistConfig, usersReducer),
+  categories: categoriesReducer,
   photos: photosReducer,
 });
+
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>

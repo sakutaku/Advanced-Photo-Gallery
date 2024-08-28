@@ -32,7 +32,7 @@ const LoginForm = () => {
       await dispatch(loginUser(state)).unwrap();
       navigate("/");
     } catch (e) {
-      alert("Something is wrong!");
+      console.log(e);
     } finally {
       setState(() => ({
         username: "",
@@ -46,7 +46,7 @@ const LoginForm = () => {
       await dispatch(fetchGoogleLogin(credential)).unwrap();
       navigate("/");
     } catch (e) {
-      alert("Something is wrong!");
+      console.log(e);
     }
   };
 

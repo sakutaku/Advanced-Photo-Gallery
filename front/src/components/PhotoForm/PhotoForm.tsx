@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PhotoMutation } from "../../type";
 import FileInput from "../FileInput/FileInput";
 import { useSelector } from "react-redux";
@@ -8,19 +8,29 @@ import { useAppDispatch, useAppSelector } from "../../app/hook";
 import { createPhoto } from "../../store/photosThunk";
 import { selectUser } from "../../store/usersSlice";
 import BtnSpinner from "../Spinner/BtnSpinner";
+import { fetchCategories } from "../../store/categoriesThunk";
+import { selectCategories } from "../../store/categoriesSlice";
 
 const PhotoForm = () => {
   const [state, setState] = useState<PhotoMutation>({
     title: "",
     image: null,
+    category: "",
   });
   const error = useSelector(selectAddError);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const loading = useAppSelector(selectCreateLoading);
+  const categories = useAppSelector(selectCategories);
 
-  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  const inputChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = event.target;
 
     setState((prevState) => {
@@ -44,7 +54,6 @@ const PhotoForm = () => {
     if (user) {
       try {
         await dispatch(createPhoto(state)).unwrap();
-        alert("Congrats, you added new photo!");
         navigate("/");
       } catch (e) {
         alert("Something is wrong!");
@@ -52,6 +61,7 @@ const PhotoForm = () => {
         setState(() => ({
           title: "",
           image: null,
+          category: "",
         }));
       }
     }
@@ -78,6 +88,25 @@ const PhotoForm = () => {
           label="Image:"
         />
       </>
+      <div className="input-wrap">
+        <select
+          value={state.category}
+          required
+          onChange={inputChangeHandler}
+          name="category"
+          id="category"
+          className="form-control"
+        >
+          <option value="" disabled defaultValue="">
+            Select category
+          </option>
+          {categories.map((item, index) => (
+            <option value={item._id} key={index}>
+              {item.title}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="input-wrap">
         <button className="form-btn" type="submit" disabled={loading}>
           {loading && <BtnSpinner />}

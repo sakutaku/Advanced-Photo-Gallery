@@ -30,6 +30,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
   const onLogoClick = () => {
     navigate("/");
+    console.log(img);
   };
 
   return (
@@ -44,7 +45,14 @@ const UserMenu: React.FC<Props> = ({ user }) => {
           </span>
         </h2>
         <span>
-          <img src={img} alt="avatar" className="header-avatar" />
+          <img
+            src={
+              img &&
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL2sDfN1_HqrzkrWCpqxmVqlg79FdW8XnVPg&s"
+            }
+            alt="avatar"
+            className="header-avatar"
+          />
         </span>
       </div>
       <div className="logo" onClick={onLogoClick}>
