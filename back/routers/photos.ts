@@ -16,6 +16,10 @@ photosRouter.get("/", async (req, res, next) => {
       );
 
       return res.send(userPhotos);
+    } else if (req.query.category) {
+      const photosCategory = await Photo.find({ category: req.query.category});
+
+      return res.send(photosCategory);
     }
 
     const allPhotos = await Photo.find().populate("user", "displayName");
@@ -43,6 +47,7 @@ photosRouter.post(
       const photoData = new Photo({
         user: user._id,
         title: req.body.title,
+        category: req.body.category,
         image: req.file ? req.file.filename : null,
       });
 

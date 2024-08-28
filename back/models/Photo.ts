@@ -1,7 +1,17 @@
 import mongoose from "mongoose";
 import User from "./User";
+import Category from "./Category";
 
 const PhotoSchema = new mongoose.Schema({
+  category: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Category',
+    required: true,
+    validate: {
+        validator: async (value: mongoose.Types.ObjectId) => await Category.findById(value),
+        message: 'Category does not exist!',
+    },
+},
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User",
