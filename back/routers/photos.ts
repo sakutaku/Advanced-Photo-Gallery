@@ -32,6 +32,28 @@ photosRouter.get("/", async (req, res, next) => {
   }
 });
 
+photosRouter.get("/filter", async (req, res, next) => {
+  try {
+    const { title } = req.query;
+
+    const filter: { title?: { $regex: string, $options: string } } = {};
+
+    if (typeof title === 'string' && title.trim().length > 0) {
+      filter.title = { $regex: title, $options: "i" };
+    }
+
+    const filteredPhotos = await Photo.find(filter).populate("user", "displayName");
+
+    return res.send(filteredPhotos);
+  } catch (e) {
+    if (e instanceof mongoose.Error.ValidationError) {
+      return res.status(400).send(e.message);
+    }
+
+    next(e);
+  }
+});
+
 photosRouter.post(
   "/",
   auth,
