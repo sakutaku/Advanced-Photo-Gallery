@@ -50,3 +50,21 @@
 .select div:hover {
     background-color: #80d0c7ba;
 }
+
+@media only screen and (max-width: 950px) {
+    .select div {
+        width: 80px;
+        font-size: 14px;
+    }     
+}
+
+@media only screen and (max-width: 650px) {
+    .category-input-wrap,
+    .select {
+        width: 100%;
+    }
+    .category-wrapper {
+        flex-direction: column;
+        margin-top: 25px;
+    }    
+}

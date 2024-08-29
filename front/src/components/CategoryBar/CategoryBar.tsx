@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./CategoryBar.css";
 import { ICategory } from "../../type";
+import { useAppDispatch } from "../../app/hook";
+import { fetchByCategory } from "../../store/photosThunk";
 
 interface Props {
   categories: ICategory[];
@@ -8,6 +10,15 @@ interface Props {
 
 const CategoryBar: React.FC<Props> = ({ categories }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const dispatch = useAppDispatch();
+
+  const categoryClick = (id: string) => {
+    try {
+      dispatch(fetchByCategory(id));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="category-wrapper">
@@ -22,7 +33,9 @@ const CategoryBar: React.FC<Props> = ({ categories }) => {
       </div>
       <div className="select">
         {categories.map((category, index) => (
-          <div key={index}>{category?.title}</div>
+          <div key={index} onClick={() => categoryClick(category._id)}>
+            {category?.title}
+          </div>
         ))}
       </div>
     </div>

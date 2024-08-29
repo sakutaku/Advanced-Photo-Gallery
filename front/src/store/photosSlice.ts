@@ -1,6 +1,11 @@
 import { GlobalError, Photo } from "../type";
 import { createSlice } from "@reduxjs/toolkit";
-import { createPhoto, deletePhoto, fetchPhotos } from "./photosThunk";
+import {
+  createPhoto,
+  deletePhoto,
+  fetchByCategory,
+  fetchPhotos,
+} from "./photosThunk";
 import { RootState } from "../app/store";
 
 interface CocktailsState {
@@ -32,6 +37,16 @@ export const photosSlice = createSlice({
       state.photosLoading = false;
     });
     builder.addCase(fetchPhotos.rejected, (state) => {
+      state.photosLoading = false;
+    });
+    builder.addCase(fetchByCategory.pending, (state) => {
+      state.photosLoading = true;
+    });
+    builder.addCase(fetchByCategory.fulfilled, (state, { payload: cat }) => {
+      state.photos = cat;
+      state.photosLoading = false;
+    });
+    builder.addCase(fetchByCategory.rejected, (state) => {
       state.photosLoading = false;
     });
     builder.addCase(createPhoto.pending, (state) => {

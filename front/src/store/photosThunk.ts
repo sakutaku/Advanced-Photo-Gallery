@@ -15,6 +15,18 @@ export const fetchPhotos = createAsyncThunk<Photo[], void | string>(
   },
 );
 
+export const fetchByCategory = createAsyncThunk<Photo[], void | string>(
+  "photos/fetchByCategory",
+  async (category) => {
+    if (category) {
+      const response = await axiosApi.get<Photo[]>(`/photos?category=${category}`);
+      return response.data;
+    }
+
+    return [];
+  },
+);
+
 export const createPhoto = createAsyncThunk<
   void,
   PhotoMutation,
