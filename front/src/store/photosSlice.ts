@@ -5,6 +5,7 @@ import {
   deletePhoto,
   fetchByCategory,
   fetchPhotos,
+  filterByTitle,
 } from "./photosThunk";
 import { RootState } from "../app/store";
 
@@ -39,6 +40,7 @@ export const photosSlice = createSlice({
     builder.addCase(fetchPhotos.rejected, (state) => {
       state.photosLoading = false;
     });
+
     builder.addCase(fetchByCategory.pending, (state) => {
       state.photosLoading = true;
     });
@@ -49,6 +51,18 @@ export const photosSlice = createSlice({
     builder.addCase(fetchByCategory.rejected, (state) => {
       state.photosLoading = false;
     });
+
+    builder.addCase(filterByTitle.pending, (state) => {
+      state.photosLoading = true;
+    });
+    builder.addCase(filterByTitle.fulfilled, (state, { payload: title }) => {
+      state.photos = title;
+      state.photosLoading = false;
+    });
+    builder.addCase(filterByTitle.rejected, (state) => {
+      state.photosLoading = false;
+    });
+
     builder.addCase(createPhoto.pending, (state) => {
       state.createLoading = true;
       state.addError = null;
@@ -60,6 +74,7 @@ export const photosSlice = createSlice({
       state.createLoading = false;
       state.addError = error || null;
     });
+    
     builder.addCase(deletePhoto.pending, (state) => {
       state.deleteLoading = true;
     });
