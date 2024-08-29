@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./CategoryBar.css";
 import { ICategory } from "../../type";
 import { useAppDispatch } from "../../app/hook";
-import { fetchByCategory } from "../../store/photosThunk";
+import { fetchByCategory, fetchPhotos, filterByTitle } from "../../store/photosThunk";
+import { debounce } from 'lodash';
 
 interface Props {
   categories: ICategory[];
@@ -19,6 +20,22 @@ const CategoryBar: React.FC<Props> = ({ categories }) => {
       console.log(e);
     }
   };
+
+  const debouncedFetchPhotosByTitle = useCallback(
+    debounce((searchTerm: string) => {
+      dispatch(filterByTitle(searchTerm));
+    }, 3000), // Delay of 300ms
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (searchTerm) {
+      debouncedFetchPhotosByTitle(searchTerm);
+    } else {
+      // Optionally, you can dispatch an action to fetch all photos when searchTerm is empty
+      // dispatch(filterByTitle(""));
+    }
+  }, [searchTerm, debouncedFetchPhotosByTitle, dispatch]);
 
   return (
     <div className="category-wrapper">
