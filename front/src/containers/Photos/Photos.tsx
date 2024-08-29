@@ -6,14 +6,19 @@ import PhotoItem from "../../components/PhotoItem/PhotoItem";
 import { fetchPhotos } from "../../store/photosThunk";
 import Spinner from "../../components/Spinner/Spinner";
 import "./Photos.css";
+import CategoryBar from "../../components/CategoryBar/CategoryBar";
+import { fetchCategories } from "../../store/categoriesThunk";
+import { selectCategories } from "../../store/categoriesSlice";
 
 const Photos = () => {
   const dispatch = useAppDispatch();
   const photos = useAppSelector(selectPhotos);
+  const categories = useAppSelector(selectCategories);
   const photosLoading = useAppSelector(selectPhotosLoading);
 
   useEffect(() => {
     dispatch(fetchPhotos());
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   if (photosLoading) {
@@ -26,6 +31,7 @@ const Photos = () => {
 
   return (
     <div className="container">
+      <CategoryBar categories={categories} />
       <div className="photos-page">
         {photos.map((photo) => (
           <Fade key={photo._id}>
