@@ -23,19 +23,24 @@ const CategoryBar: React.FC<Props> = ({ categories }) => {
 
   const debouncedFetchPhotosByTitle = useCallback(
     debounce((searchTerm: string) => {
-      dispatch(filterByTitle(searchTerm));
-    }, 3000), // Delay of 300ms
+      dispatch(filterByTitle(searchTerm))
+        .then((response) => {
+          const payload = response.payload as any[]; 
+          if (payload.length === 0) {
+            dispatch(fetchPhotos());
+          } else {
+          }
+        })
+        .catch((error) => console.log(error));
+    }, 3000),
     [dispatch]
   );
 
   useEffect(() => {
     if (searchTerm) {
       debouncedFetchPhotosByTitle(searchTerm);
-    } else {
-      // Optionally, you can dispatch an action to fetch all photos when searchTerm is empty
-      // dispatch(filterByTitle(""));
-    }
-  }, [searchTerm, debouncedFetchPhotosByTitle, dispatch]);
+    } 
+  }, [searchTerm, debouncedFetchPhotosByTitle]);
 
   return (
     <div className="category-wrapper">

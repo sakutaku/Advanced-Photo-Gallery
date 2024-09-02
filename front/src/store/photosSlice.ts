@@ -1,5 +1,5 @@
 import { GlobalError, Photo } from "../type";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   createPhoto,
   deletePhoto,
