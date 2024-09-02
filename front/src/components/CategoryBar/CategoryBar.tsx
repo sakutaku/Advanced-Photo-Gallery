@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import "./CategoryBar.css";
 import { ICategory } from "../../type";
 import { useAppDispatch } from "../../app/hook";
 import { fetchByCategory, fetchPhotos, filterByTitle } from "../../store/photosThunk";
 import { debounce } from 'lodash';
+import "./CategoryBar.css";
 
 interface Props {
   categories: ICategory[];
@@ -41,7 +41,7 @@ const CategoryBar: React.FC<Props> = ({ categories }) => {
       debouncedFetchPhotosByTitle(searchTerm);
     } 
   }, [searchTerm, debouncedFetchPhotosByTitle]);
-
+ 
   return (
     <div className="category-wrapper">
       <div className="category-input-wrap">
